@@ -1,0 +1,44 @@
+package com.senai.backend.equipamentos.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.senai.backend.equipamentos.models.Equipamento;
+import com.senai.backend.equipamentos.services.EquipamentoService;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
+@RestController 
+@RequestMapping("/equipamentos")
+public class EquipamentoController {
+    
+    @Autowired 
+    private EquipamentoService equipamentoService;
+
+    @GetMapping ("/contar-equipamentos")
+    public Long contarEquipamentos() {
+        return equipamentoService.contarEquipamento();
+    
+    }
+
+    @GetMapping ("/buscar-equipamento/{id}")
+    public Equipamento buscarEquipamento(@PathVariable Long id) {
+        return equipamentoService.buscarEquipamento(id);
+    }
+
+    @GetMapping ("/listar-equipamentos")
+    public List<Equipamento> listarEquipamentos() {
+        return equipamentoService.listarEquipamentos();
+    }
+
+    @PostMapping ("/cadastrar-equipamento")
+    public Equipamento cadastrarEquipamento(@RequestBody Equipamento equipamento) {
+        return equipamentoService.cadastrarEquipamento(equipamento);    
+    }
+}
