@@ -30,4 +30,13 @@ public class EquipamentoService {
         return equipamentoRepository.findById(id).get();
     }
 
+    public boolean deletarEquipamento(long id) {
+        if (equipamentoRepository.existsById(id)) {
+            equipamentoRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
