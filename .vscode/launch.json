@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "EquipamentosApplication",
+            "request": "launch",
+            "mainClass": "com.senai.backend.equipamentos.EquipamentosApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "EquipamentosApplication",
+            "request": "launch",
+            "mainClass": "com.senai.backend.equipamentos.EquipamentosApplication",
+            "projectName": "equipamentos"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-EquipamentosApplication<equipamentos>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

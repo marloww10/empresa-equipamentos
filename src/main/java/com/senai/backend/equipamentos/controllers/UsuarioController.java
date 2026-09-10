@@ -1,6 +1,8 @@
 package com.senai.backend.equipamentos.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.senai.backend.equipamentos.configs.SpringSecurityConfigs;
 import com.senai.backend.equipamentos.models.Usuario;
 import com.senai.backend.equipamentos.services.UsuarioService;
 
@@ -21,6 +24,9 @@ public class UsuarioController {
 
     @Autowired 
     private UsuarioService usuarioService;
+
+    @Autowired 
+    private SpringSecurityConfigs springSecurityConfigs;
 
     @GetMapping("/contar-usuarios")
     public Long contarUsuarios() {
@@ -50,12 +56,30 @@ public class UsuarioController {
         return usuarioService.cadastrarUsuario(usuario);
     }
 
-        @PostMapping("/login")
-    public Usuario fazerLogin(@RequestBody Usuario usuario) {
-        return usuarioService.fazerLogin(
-            usuario.getEmail(),
-            usuario.getSenha()
+@PostMapping("/login")
+public Map<String, String> fazerLogin(@RequestBody Usuario usuario) {
+
+    Usuario usuarioEncontrado = usuarioService.fazerLogin(
+        usuario.getEmail(),
+        usuario.getSenha()
+    );
+
+    Map<String, String> resposta = new HashMap<>();
+
+    if (usuarioEncontrado != null) {
+
+        String token = springSecurityConfigs.gerarToken(
+            usuarioEncontrado.getEmail()
         );
+
+        resposta.put("token", token);
+
+        return resposta;
     }
+
+    resposta.put("erro", "Email ou senha inválidos");
+
+    return resposta;
+}
 
 }
