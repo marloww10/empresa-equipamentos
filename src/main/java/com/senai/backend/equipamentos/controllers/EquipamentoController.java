@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.senai.backend.equipamentos.models.Equipamento;
 import com.senai.backend.equipamentos.services.EquipamentoService;
+
 
 @RestController 
 @RequestMapping("/equipamentos")
@@ -48,5 +50,16 @@ public class EquipamentoController {
             return "Equipamento deletado com sucesso!";
         }
         return "Equipamento não encontrado!";
+    }
+
+    @PutMapping("/atualizar-equipamento/{id}")
+    public Equipamento atualizarEquipamento(
+            @PathVariable Long id,
+            @RequestBody Equipamento equipamento
+    ) {
+        return equipamentoService.atualizarEquipamento(
+            id,
+            equipamento
+        );
     }
 }

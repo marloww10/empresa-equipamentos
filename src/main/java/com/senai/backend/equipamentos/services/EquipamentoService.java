@@ -39,4 +39,13 @@ public class EquipamentoService {
         }
     }
 
+    public Equipamento atualizarEquipamento(long id, Equipamento equipamento) {
+        if (equipamentoRepository.existsById(id)) {
+            equipamento.setId(id);
+            return equipamentoRepository.save(equipamento);
+        } else {
+            return null;
+        }
+    }
+
 }
