@@ -62,4 +62,11 @@ public class EquipamentoController {
             equipamento
         );
     }
+
+    @GetMapping("/estoque-minimo")
+    public List<Equipamento> listarEstoqueMinimo() {
+        return equipamentoService.listarEstoqueMinimo();
+
+    }
+
 }

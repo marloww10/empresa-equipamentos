@@ -1,7 +1,5 @@
 package com.senai.backend.equipamentos.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +13,6 @@ public class Usuario {
     private Long id;
     private String nome;
     private String email;
-    @JsonIgnore 
     private String senha;
 
     //construtor vazio

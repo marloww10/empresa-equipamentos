@@ -48,4 +48,13 @@ public class EquipamentoService {
         }
     }
 
+    public List<Equipamento> listarEstoqueMinimo() {
+    return equipamentoRepository.findAll()
+        .stream()
+        .filter(equipamento ->
+            equipamento.getQuantidade() <= equipamento.getQuantidademinima()
+        )
+        .toList();
+}
+
 }
